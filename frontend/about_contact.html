@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About & Contact | Washim Shaikh</title>
+
+    <!-- Modern Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #0F766E;
+            --primary-glow: rgba(15, 118, 110, 0.15);
+            --bg: #F8FAF9;
+            --card-bg: rgba(255, 255, 255, 0.8);
+            --card-border: rgba(255, 255, 255, 0.9);
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            background-image: url('portfolio_background_mesh_1777042794184.png');
+            background-size: cover;
+            background-attachment: fixed;
+            color: var(--text-main);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* --- Navbar --- */
+        nav {
+            position: fixed;
+            top: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1200px;
+            padding: 12px 32px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--card-border);
+            border-radius: 99px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: -1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            opacity: 0.7;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+            color: var(--primary);
+        }
+
+        .nav-cta {
+            background: var(--primary);
+            color: white !important;
+            padding: 8px 20px;
+            border-radius: 99px;
+            opacity: 1 !important;
+        }
+
+        /* --- Content Container --- */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 160px 5% 80px;
+        }
+
+        .page-header {
+            margin-bottom: 4rem;
+            text-align: left;
+        }
+
+        .page-header h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            letter-spacing: -2px;
+            line-height: 1;
+            margin-bottom: 1.5rem;
+        }
+
+        .accent {
+            color: var(--primary);
+        }
+
+        /* --- Bento Style Layout for About --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 2rem;
+            margin-bottom: 6rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            border-radius: 32px;
+            padding: 3rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+        }
+
+        .about-text p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .about-text p strong {
+            color: var(--text-main);
+            font-weight: 700;
+        }
+
+        .stat-card {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .stat-item h4 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+        }
+
+        .stat-item p {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        /* --- Contact Section --- */
+        .contact-section {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-section h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            margin-bottom: 1rem;
+        }
+
+        .contact-section p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 4rem;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .contact-item {
+            background: white;
+            border: 1px solid var(--card-border);
+            padding: 2rem;
+            border-radius: 24px;
+            text-decoration: none;
+            color: inherit;
+            text-align: left;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px -10px var(--primary-glow);
+        }
+
+        .contact-item small {
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--primary);
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-item span {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        /* --- Footer --- */
+        footer {
+            padding: 60px 0;
+            text-align: center;
+            margin-top: 4rem;
+            border-top: 1px solid var(--card-border);
+        }
+
+        .footer-logo {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            display: block;
+            text-decoration: none;
+        }
+
+        /* --- Animations --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 0.8s var(--transition);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 900px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">Washim Shaikh</a>
+        <div class="nav-links">
+            <a href="index.html">🧠 AI Detector</a>
+            <a href="portfolio.html">👤 Portfolio</a>
+            <a href="about_contact.html">📄 About</a>
+            <a href="#contact" class="nav-cta">✉️ Let's Talk</a>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <header class="page-header reveal">
+            <h1>Turning <span class="accent">Code</span> into<br>Meaningful Impact.</h1>
+        </header>
+
+        <section class="about-grid">
+            <div class="card about-text reveal">
+                <p>
+                    Software engineering, to me, is more than just shipping features—it's about <strong>architecting
+                        solutions</strong> that address fundamental human needs. As a Computer Science Engineering
+                    student, I've dedicated my journey to mastering the intersection of <strong>AI and practical
+                        automation</strong>.
+                </p>
+                <p>
+                    From the direct-trade logic of <strong>AgriTrade</strong> to the high-stakes predictive power of my
+                    <strong>Fraud Detection</strong> models, I focus on building systems that are as scalable as they
+                    are impactful. I believe in the power of "intelligent simplicity"—using complex algorithms to create
+                    seamless, intuitive experiences.
+                </p>
+                <p>
+                    Currently, I'm deep-diving into <strong>Cloud Scalability</strong> and advanced <strong>Machine
+                        Learning</strong> architectures, always looking for the next challenge that pushes the
+                    boundaries of what code can do for the real world.
+                </p>
+            </div>
+
+            <div class="card stat-card reveal">
+                <div class="stat-item">
+                    <h4>Current Pursuit</h4>
+                    <p>AWS Cloud & Scalable AI Architecture</p>
+                </div>
+                <div class="stat-item">
+                    <h4>Core Values</h4>
+                    <p>Integrity, Innovation, and Impact-First Design.</p>
+                </div>
+                <div class="stat-item">
+                    <h4>Interests</h4>
+                    <p>Vision Transformers, Financial AI, and Agriculture Tech.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <h2 class="reveal">Let's build something.</h2>
+            <p class="reveal">Whether you're looking for a collaborator, a developer, or just want to talk tech, I'm
+                always just a message away.</p>
+
+            <div class="contact-grid">
+                <a href="mailto:washimshaikh33@gmail.com" class="contact-item reveal">
+                    <small>Direct Email</small>
+                    <span>washimshaikh33@gmail.com</span>
+                </a>
+                <a href="tel:+918884958185" class="contact-item reveal">
+                    <small>Phone / WhatsApp</small>
+                    <span>+91 8884958185</span>
+                </a>
+                <a href="https://github.com/Washim-8" target="_blank" class="contact-item reveal">
+                    <small>Open Source</small>
+                    <span>github.com/Washim-8</span>
+                </a>
+                <a href="https://www.linkedin.com/in/washim-shaikh-349868281/" target="_blank"
+                    class="contact-item reveal">
+                    <small>Professional Network</small>
+                    <span>View LinkedIn Profile</span>
+                </a>
+            </div>
+
+            <div class="reveal" style="font-weight: 700; color: var(--text-muted);">
+                Let's connect and create something that lasts.
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <a href="index.html" class="footer-logo">Washim Shaikh</a>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">&copy; 2024 Washim Shaikh. Engineered for Excellence.
+        </p>
+    </footer>
+
+    <script>
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal();
+    </script>
+
+</body>
+
+</html>

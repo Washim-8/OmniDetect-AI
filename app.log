@@ -1,0 +1,16 @@
+2026-04-23 21:32:08,426 [INFO] object_detection: Loading model from yolov8n.pt
+2026-04-23 21:53:30,109 [INFO] object_detection: Loading model from yolov8m.pt
+2026-04-23 22:09:39,397 [INFO] object_detection: Loading model from yolov8m.pt
+2026-04-23 22:10:55,307 [INFO] object_detection: Loading model from yolov8m.pt
+2026-04-23 22:23:39,081 [INFO] object_detection: Loading model from yolov8x.pt
+2026-04-23 22:29:16,583 [INFO] object_detection: Loading model from yolov8x.pt
+2026-04-23 23:13:55,543 [INFO] object_detection: Loading advanced model from yolo11n.pt
+2026-04-23 23:13:59,357 [INFO] object_detection: Model loaded successfully on cpu
+2026-04-23 23:30:03,146 [INFO] object_detection: Loading advanced model from yolo11n.pt
+2026-04-23 23:30:04,027 [INFO] object_detection: Model loaded successfully on cpu
+2026-04-23 23:40:15,917 [INFO] object_detection: Loading advanced model from yolo11m.pt
+2026-04-23 23:40:29,393 [INFO] object_detection: Model loaded successfully on cpu
+2026-04-23 23:52:14,372 [INFO] object_detection: Loading advanced model from yolo11x.pt
+2026-04-23 23:52:54,506 [INFO] object_detection: Model loaded successfully on cpu
+2026-04-24 10:27:30,618 [INFO] object_detection: Loading Extreme Capacity model from yolo11m.pt
+2026-04-24 10:27:34,169 [INFO] object_detection: Model loaded successfully on cpu
