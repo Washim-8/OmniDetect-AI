@@ -10,16 +10,16 @@ export default defineConfig({
     target: 'es2018',
     rollupOptions: {
       output: {
-        manualChunks: {
-          onnx: ['onnxruntime-web'],
-          react: ['react', 'react-dom'],
+        manualChunks(id) {
+          if (id.includes('onnxruntime-web')) return 'onnx'
+          if (id.includes('node_modules/react') || id.includes('node_modules/react-dom')) return 'react'
         },
       },
     },
   },
   worker: {
     format: 'es',
-    plugins: [],
+    plugins: () => [],
   },
   server: {
     host: '0.0.0.0',
@@ -31,7 +31,7 @@ export default defineConfig({
   },
   optimizeDeps: {
     include: ['onnxruntime-web'],
-    esbuildOptions: {
+    rolldownOptions: {
       target: 'es2018',
     },
   },
