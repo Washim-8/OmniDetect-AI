@@ -32,4 +32,9 @@ services:
       ./build-frontend.sh
     publishDir: frontend/dist
     pullRequestPreviewsEnabled: no
+    envVars:
+      - key: NODE_VERSION
+        value: "20.19.0"
+      - key: VITE_API_URL
+        value: https://omnidetect-ai-cx4w.onrender.com
     autoDeploy: true
