@@ -1,0 +1,35 @@
+services:
+  - type: web
+    name: object-detection-backend
+    runtime: python
+    plan: standard
+    region: oregon
+    buildCommand: |
+      set -e
+      pip install --upgrade pip
+      pip install -r backend/requirements.txt
+      chmod +x start-backend.sh
+    startCommand: "./start-backend.sh"
+    healthCheckPath: /health
+    numInstances: 1
+    envVars:
+      - key: MODEL_PATH
+        value: yolov8n.pt
+      - key: PYTHONUNBUFFERED
+        value: "1"
+      - key: PYTHONPATH
+        value: /opt/render/project/src
+    autoDeploy: true
+
+  - type: web
+    name: object-detection-frontend
+    runtime: static
+    plan: starter
+    region: oregon
+    buildCommand: |
+      set -e
+      chmod +x build-frontend.sh
+      ./build-frontend.sh
+    publishDir: frontend/dist
+    pullRequestPreviewsEnabled: no
+    autoDeploy: true

@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+.eggs/
+*.egg
+venv/
+env/
+ENV/
+build/
+dist/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Models
+*.pt
+*.onnx
+!frontend/public/models/*.onnx
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+logs/
+
+# Docker
+.dockerignore
+
+# Jupyter
+.ipynb_checkpoints
