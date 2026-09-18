@@ -1,10 +1,12 @@
+import os
+import threading
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, FileResponse
+from fastapi.staticfiles import StaticFiles
 from backend.api.routes import router as api_router
 from backend.core.config import settings
 from backend.ml.inference import detector_status, get_detector
-import threading
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
@@ -42,10 +44,6 @@ async def startup_event():
         thread = threading.Thread(target=_load_model_async, daemon=True)
         thread.start()
 
-@app.get("/")
-def root():
-    return {"message": f"Welcome to {settings.PROJECT_NAME}"}
-
 @app.get("/health")
 def health_check():
     status = detector_status()
@@ -72,3 +70,28 @@ def health_check():
         }
     )
 
+# Static file serving for React frontend (when dist is built)
+frontend_dist = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "frontend", "dist"))
+
+if os.path.exists(frontend_dist):
+    assets_dir = os.path.join(frontend_dist, "assets")
+    if os.path.exists(assets_dir):
+        app.mount("/assets", StaticFiles(directory=assets_dir), name="assets")
+    models_dir = os.path.join(frontend_dist, "models")
+    if os.path.exists(models_dir):
+        app.mount("/models", StaticFiles(directory=models_dir), name="models")
+
+    @app.get("/")
+    async def serve_index():
+        return FileResponse(os.path.join(frontend_dist, "index.html"))
+
+    @app.get("/{full_path:path}")
+    async def serve_spa(full_path: str):
+        file_path = os.path.join(frontend_dist, full_path)
+        if os.path.isfile(file_path):
+            return FileResponse(file_path)
+        return FileResponse(os.path.join(frontend_dist, "index.html"))
+else:
+    @app.get("/")
+    def root():
+        return {"message": f"Welcome to {settings.PROJECT_NAME}"}
