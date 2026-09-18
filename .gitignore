@@ -19,8 +19,11 @@ dist/
 
 # Models
 *.pt
+!yolov8n.pt
 *.onnx
 !frontend/public/models/*.onnx
+node_modules/
+frontend/dist/
 
 # IDE
 .vscode/

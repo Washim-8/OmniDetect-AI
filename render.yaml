@@ -1,40 +1,45 @@
 services:
+  # ===================================================
+  # Backend Web Service (FastAPI + YOLO Inference API)
+  # ===================================================
   - type: web
-    name: object-detection-backend
+    name: omnidetect-ai-backend
     runtime: python
-    plan: standard
+    plan: free
     region: oregon
-    buildCommand: |
-      set -e
-      pip install --upgrade pip
-      pip install -r backend/requirements.txt
-      chmod +x start-backend.sh
-    startCommand: "./start-backend.sh"
+    buildCommand: pip install --upgrade pip && pip install -r backend/requirements.txt
+    startCommand: uvicorn backend.api.main:app --host 0.0.0.0 --port $PORT --workers 1 --timeout-keep-alive 300
     healthCheckPath: /health
-    numInstances: 1
+    autoDeploy: true
     envVars:
-      - key: MODEL_PATH
-        value: yolov8n.pt
       - key: PYTHONUNBUFFERED
         value: "1"
       - key: PYTHONPATH
-        value: /opt/render/project/src
-    autoDeploy: true
+        value: .
+      - key: MODEL_PATH
+        value: yolov8n.pt
+      - key: CORS_ORIGINS
+        value: "*"
+      - key: CONFIDENCE_THRESHOLD
+        value: "0.25"
+      - key: INPUT_SIZE
+        value: "640"
+      - key: USE_HALF
+        value: "false"
 
-  - type: web
-    name: object-detection-frontend
-    runtime: static
-    plan: starter
+  # ===================================================
+  # Frontend Static Site (React + Vite Dashboard)
+  # ===================================================
+  - type: static
+    name: omnidetect-ai-frontend
+    plan: free
     region: oregon
-    buildCommand: |
-      set -e
-      chmod +x build-frontend.sh
-      ./build-frontend.sh
-    publishDir: frontend/dist
-    pullRequestPreviewsEnabled: no
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: ./frontend/dist
+    pullRequestPreviewsEnabled: false
+    autoDeploy: true
     envVars:
       - key: NODE_VERSION
         value: "20.19.0"
       - key: VITE_API_URL
-        value: https://omnidetect-ai-cx4w.onrender.com
-    autoDeploy: true
+        sync: false
